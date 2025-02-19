@@ -2,7 +2,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import View from "@/components/View";
 import { formatDate } from "@/lib/utils";
-import { sanityFetch } from "@/sanity/lib/live";
+import { client } from "@/sanity/lib/client";
 import { STARTUP_QUERY } from "@/sanity/lib/queries";
 import markdownit from "markdown-it";
 import Image from "next/image";
@@ -16,12 +16,7 @@ export const experimental_ppr = true;
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 	const id = (await params).id;
 
-	const { data } = await sanityFetch({
-		query: STARTUP_QUERY,
-		params: {
-			startupId: id,
-		},
-	});
+	const data = await client.fetch(STARTUP_QUERY, { startupId: id });
 
 	if (!data) return notFound();
 
