@@ -16,3 +16,7 @@ export function formatDate(date: string | Date) {
 export function formatNumber(num: number) {
 	return num + " " + (+num > 1 ? "views" : "view");
 }
+
+export function parseServerData<T>(response: T) {
+	return JSON.parse(JSON.stringify(response));
+}
