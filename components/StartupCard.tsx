@@ -4,6 +4,7 @@ import { EyeIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { Skeleton } from "./ui/skeleton";
 
 export type StartupCardType = Omit<Startup, "author"> & {
 	author?: Author;
@@ -37,11 +38,13 @@ const StartupCard = (props: StartupCardType) => {
 				</div>
 				<Link href={`/user/${props.author?._id}`}>
 					<Image
-						src="https://placehold.co/48.png"
+						src={
+							props.author?.image || "https://placehold.co/48.png"
+						}
 						alt="placeholder"
 						width={48}
 						height={48}
-						className="rounded-full overflow-hidden"
+						className="rounded-full overflow-hidden object-cover min-h-12"
 					/>
 				</Link>
 			</div>
@@ -66,5 +69,15 @@ const StartupCard = (props: StartupCardType) => {
 		</li>
 	);
 };
+
+export const StartupCardSkeleton = () => (
+	<>
+		{new Array(4).fill("i").map((_, i) => (
+			<li key={i}>
+				<Skeleton className="startup-card_skeleton"></Skeleton>
+			</li>
+		))}
+	</>
+);
 
 export default StartupCard;
