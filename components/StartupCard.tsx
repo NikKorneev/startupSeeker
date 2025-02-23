@@ -50,7 +50,9 @@ const StartupCard = (props: StartupCardType) => {
 			</div>
 
 			<Link href={`/startup/${props._id}`}>
-				<p className="startup-card__desc mb-4">{props.description}</p>
+				<p className="startup-card__desc mb-4 min-h-14 max-h-12 line-clamp-3">
+					{props.description}
+				</p>
 				<img
 					src={props.image}
 					alt="placeholder"
