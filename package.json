@@ -7,11 +7,11 @@
 		"dev": "next dev ",
 		"build": "next build",
 		"start": "next start",
-		"postinstall": "npm install sanity",
 		"lint": "next lint",
-		"predev": "npm run typegen",
-		"prebuild": "npm run typegen",
-		"typegen": "sanity schema extract --path=./sanity/extract.json && sanity typegen generate"
+		"predev": "node -e \"if (!process.env.VERCEL) require('child_process').execSync('npm run typegen', {stdio: 'inherit'})\"",
+		"prebuild": "node -e \"if (!process.env.VERCEL) require('child_process').execSync('npm run typegen', {stdio: 'inherit'})\"",
+		"typegen": "sanity typegen generate",
+		"postinstall": "node -e \"if (!process.env.VERCEL) require('child_process').execSync('npm run typegen', {stdio: 'inherit'})\""
 	},
 	"dependencies": {
 		"@radix-ui/react-avatar": "^1.1.3",
